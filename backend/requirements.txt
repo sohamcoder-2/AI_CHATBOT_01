@@ -1,0 +1,7 @@
+flask==3.0.0
+flask-cors==4.0.0
+supabase==2.3.4
+textblob==0.17.1
+nltk==3.8.1
+python-dotenv==1.0.0
+gunicorn==21.2.0

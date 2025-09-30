@@ -1,0 +1,293 @@
+AI MENTAL HEALTH CHATBOT - DIRECTORY STRUCTURE
+===============================================
+
+project/
+│
+├── 📄 .env                              # Frontend environment variables
+├── 📄 .gitignore                        # Git ignore file
+├── 📄 package.json                      # Node.js dependencies
+├── 📄 package-lock.json                 # Locked dependency versions
+├── 📄 tsconfig.json                     # TypeScript configuration
+├── 📄 tsconfig.app.json                 # App TypeScript config
+├── 📄 tsconfig.node.json                # Node TypeScript config
+├── 📄 vite.config.ts                    # Vite build configuration
+├── 📄 tailwind.config.js                # Tailwind CSS config
+├── 📄 postcss.config.js                 # PostCSS config
+├── 📄 eslint.config.js                  # ESLint configuration
+├── 📄 index.html                        # HTML entry point
+│
+├── 📘 QUICK_START.md                    # ⭐ START HERE - Quick setup guide
+├── 📘 SETUP_INSTRUCTIONS.md             # Detailed setup instructions
+├── 📘 PROJECT_STRUCTURE.md              # Architecture documentation
+├── 📘 PROJECT_SUMMARY.txt               # Project overview
+├── 📘 DIRECTORY_STRUCTURE.txt           # This file
+│
+├── 📁 src/                              # React Frontend Source
+│   ├── 📄 main.tsx                      # React entry point
+│   ├── 📄 App.tsx                       # ⭐ Main application component
+│   ├── 📄 index.css                     # Global styles + animations
+│   ├── 📄 vite-env.d.ts                 # Vite type definitions
+│   │
+│   ├── 📁 components/                   # React Components
+│   │   ├── 📄 ChatMessage.tsx           # Individual message display
+│   │   ├── 📄 ChatInput.tsx             # Message input component
+│   │   ├── 📄 DisclaimerModal.tsx       # Safety disclaimer modal
+│   │   └── 📄 EmergencyBanner.tsx       # Crisis alert banner
+│   │
+│   ├── 📁 services/                     # Business Logic
+│   │   └── 📄 chatService.ts            # ⭐ Chat & NLP logic
+│   │
+│   ├── 📁 types/                        # TypeScript Types
+│   │   └── 📄 chat.ts                   # Chat-related interfaces
+│   │
+│   └── 📁 lib/                          # Libraries
+│       └── 📄 supabase.ts               # Supabase client setup
+│
+└── 📁 backend/                          # Python Flask Backend (Optional)
+    ├── 📄 app.py                        # ⭐ Main Flask server
+    ├── 📄 database.py                   # Database operations
+    ├── 📄 nlp_engine.py                 # ⭐ AI/NLP mood detection
+    ├── 📄 requirements.txt              # Python dependencies
+    ├── 📄 .env                          # Backend environment variables
+    ├── 📄 setup_database.sql            # ⭐ Database schema SQL
+    ├── 📄 Procfile                      # Heroku deployment config
+    └── 📄 runtime.txt                   # Python version for Heroku
+
+
+KEY FILES TO UNDERSTAND
+=======================
+
+📘 QUICK_START.md
+   - Start here for fastest setup
+   - Step-by-step instructions
+   - 10 minutes to running app
+
+📄 src/App.tsx
+   - Main React component
+   - Orchestrates entire frontend
+   - Session & message management
+   - UI rendering
+
+📄 src/services/chatService.ts
+   - Business logic
+   - Mood detection algorithm
+   - Response generation
+   - Database operations
+
+📄 src/components/DisclaimerModal.tsx
+   - Safety disclaimer
+   - Emergency resources
+   - Ethical considerations
+
+📄 src/components/EmergencyBanner.tsx
+   - Crisis alert display
+   - Emergency hotline numbers
+   - Shown when crisis detected
+
+📄 backend/app.py
+   - Flask REST API
+   - API endpoints
+   - Request handling
+
+📄 backend/nlp_engine.py
+   - Mood detection logic
+   - Crisis keyword detection
+   - Response generation
+   - Coping strategies
+
+📄 backend/database.py
+   - Supabase database operations
+   - CRUD functions
+   - Session & message management
+   - Analytics tracking
+
+📄 backend/setup_database.sql
+   - Complete database schema
+   - Creates all tables
+   - Sets up Row Level Security
+   - Run this in Supabase SQL Editor
+
+
+COMPONENT RELATIONSHIPS
+========================
+
+App.tsx
+  ├── DisclaimerModal.tsx (shown first)
+  ├── EmergencyBanner.tsx (shown on crisis)
+  ├── ChatMessage.tsx (for each message)
+  └── ChatInput.tsx (user input)
+
+chatService.ts
+  ├── Uses supabase.ts (database)
+  └── Implements mood detection & responses
+
+nlp_engine.py (backend)
+  ├── Mood detection
+  ├── Crisis detection
+  ├── Response generation
+  └── Coping strategies
+
+
+WORKFLOW
+========
+
+User Opens App
+    ↓
+DisclaimerModal shown
+    ↓
+User accepts → Create session
+    ↓
+Welcome message displayed
+    ↓
+User types message
+    ↓
+Mood detection runs
+    ↓
+Response generated
+    ↓
+Crisis check
+    ↓
+Show EmergencyBanner if crisis
+    ↓
+Save to database
+    ↓
+Update mood analytics
+
+
+DATABASE TABLES (in Supabase)
+==============================
+
+chat_sessions
+  - Stores anonymous user sessions
+  - Links to all messages
+  - Tracks last activity
+
+chat_messages
+  - All user and bot messages
+  - Mood detection results
+  - Timestamps
+
+mood_analytics
+  - Aggregated mood counts
+  - Per-session statistics
+  - Updated after each message
+
+
+DEPLOYMENT FILES
+================
+
+Frontend (Vercel/Netlify):
+  - Uses: package.json, vite.config.ts
+  - Build: npm run build
+  - Output: dist/
+
+Backend (Heroku/Render):
+  - Uses: requirements.txt, Procfile, runtime.txt
+  - Start: gunicorn app:app
+  - Port: From $PORT env variable
+
+
+CONFIGURATION FILES
+===================
+
+.env (Frontend)
+  - VITE_SUPABASE_URL=your_url
+  - VITE_SUPABASE_ANON_KEY=your_key
+
+backend/.env (Backend)
+  - SUPABASE_URL=your_url
+  - SUPABASE_ANON_KEY=your_key
+  - FLASK_ENV=development
+  - PORT=5000
+
+
+BUILT FILES (after npm run build)
+==================================
+
+dist/
+  ├── index.html
+  ├── assets/
+  │   ├── index-[hash].js
+  │   └── index-[hash].css
+  └── ...
+
+⚠ Don't commit dist/ folder to git
+⚠ Regenerated on each build
+
+
+DEVELOPMENT VS PRODUCTION
+==========================
+
+Development:
+  - npm run dev → http://localhost:5173
+  - Hot reload enabled
+  - Source maps included
+
+Production:
+  - npm run build → creates dist/
+  - Optimized & minified
+  - Ready for deployment
+
+
+TESTING LOCATIONS
+=================
+
+Frontend Tests:
+  - npm run typecheck (TypeScript)
+  - npm run lint (ESLint)
+  - npm run build (Build test)
+
+Backend Tests:
+  - python -m pytest (if tests added)
+  - Manual API testing
+
+Database:
+  - Supabase Table Editor
+  - SQL queries in SQL Editor
+
+
+WHERE TO START CUSTOMIZING
+===========================
+
+1. Colors/Theme:
+   → tailwind.config.js
+   → src/index.css
+
+2. Mood Keywords:
+   → src/services/chatService.ts
+   → backend/nlp_engine.py
+
+3. Responses:
+   → src/services/chatService.ts (generateResponse)
+   → backend/nlp_engine.py (RESPONSES dict)
+
+4. Coping Strategies:
+   → src/services/chatService.ts
+   → backend/nlp_engine.py (COPING_STRATEGIES dict)
+
+5. UI Layout:
+   → src/App.tsx
+   → src/components/*.tsx
+
+6. Database Schema:
+   → backend/setup_database.sql
+
+
+GETTING HELP
+============
+
+For Setup Issues:
+  → See SETUP_INSTRUCTIONS.md
+
+For Architecture Questions:
+  → See PROJECT_STRUCTURE.md
+
+For Quick Demo:
+  → See QUICK_START.md
+
+For Code Understanding:
+  → Read inline comments in source files
+  → Start with src/App.tsx
+  → Then src/services/chatService.ts
+  → Then backend/nlp_engine.py
+
